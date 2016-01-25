@@ -59,6 +59,9 @@
 - (BOOL)handleURL:(NSURL *)URL {
     id<PCRRoutingHandler> handler = [self handlerForURL:URL];
     if (!handler) {
+#if defined(DEBUG) && DEBUG
+        NSLog(@"[URL Handler] Failed to find handler matching %@",[URL absoluteString]);
+#endif
         return NO;
     }
     return [handler handle];

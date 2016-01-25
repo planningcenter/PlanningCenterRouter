@@ -57,6 +57,13 @@
         component = [URLEnum nextObject];
     }
 
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
+    for (NSURLQueryItem *item in URLComponents.queryItems) {
+        if (![params objectForKey:item.name] && item.value) {
+            [params setObject:item.value forKey:item.name];
+        }
+    }
+
     return [params copy];
 }
 
