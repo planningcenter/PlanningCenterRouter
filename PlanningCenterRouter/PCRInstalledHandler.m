@@ -17,23 +17,28 @@
 
 - (instancetype)init {
     NSAssert(NO, @"%@ isn't implemented",NSStringFromSelector(_cmd));
-    return [self initWithPath:@"" handler:(Class<PCRRoutingHandler>)[NSObject class]];
+    return [self initWithHost:@"" andPath:@"" handler:(Class<PCRRoutingHandler>)[NSObject class]];
 }
 
-- (instancetype)initWithPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
+- (instancetype)initWithHost:(NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
     self = [super init];
     if (self) {
         _path = [path copy];
+        _host = [host copy];
         _handler = handler;
     }
     return self;
 }
 
-- (nullable NSDictionary<NSString *, NSString *> *)URLMatchesPath:(NSURL *)URL {
+- (nullable NSDictionary<NSString *, NSString *> *)URLMatchesHostAndPath:(NSURL *)URL {
     NSArray<NSString *> *components = [[URL path] pathComponents];
     NSArray<NSString *> *matches = [self.path pathComponents];
 
     if (components.count < matches.count) {
+        return nil;
+    }
+    
+    if (![[URL host] isEqualToString:self.host]) {
         return nil;
     }
 
