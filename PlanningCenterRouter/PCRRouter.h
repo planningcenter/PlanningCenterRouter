@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param path    The Path to match
  *  @param handler The Handler class for this path
  */
-- (void)installHandlerForHost:(NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler;
+- (void)installHandlerForHost:(nullable NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler;
 
 /**
  *  Create a new handler instance for the URL.

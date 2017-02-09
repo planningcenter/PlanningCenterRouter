@@ -18,11 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PCRInstalledHandler : NSObject
 
-- (instancetype)initWithHost:(NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler NS_DESIGNATED_INITIALIZER;
+// Passing in a null host bypasses the host check and allows for wildcard path handlers!
+- (instancetype)initWithHost:(nullable NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, copy, readonly) NSString *path;
 
-@property (nonatomic, copy, readonly) NSString *host;
+@property (nonatomic, copy, readonly, nullable) NSString *host;
 
 @property (nonatomic, readonly) Class<PCRRoutingHandler> handler;
 

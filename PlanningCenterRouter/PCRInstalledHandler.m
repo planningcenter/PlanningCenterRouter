@@ -20,7 +20,7 @@
     return [self initWithHost:@"" andPath:@"" handler:(Class<PCRRoutingHandler>)[NSObject class]];
 }
 
-- (instancetype)initWithHost:(NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
+- (instancetype)initWithHost:(nullable NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
     self = [super init];
     if (self) {
         _path = [path copy];
@@ -38,7 +38,7 @@
         return nil;
     }
     
-    if (![[URL host] isEqualToString:self.host]) {
+    if (self.host && ![[URL host] isEqualToString:self.host]) {
         return nil;
     }
 

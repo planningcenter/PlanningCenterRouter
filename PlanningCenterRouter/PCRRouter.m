@@ -49,7 +49,7 @@
 }
 
 // MARK: - Install handler
-- (void)installHandlerForHost:(NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
+- (void)installHandlerForHost:(nullable NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
     pthread_mutex_lock(&_lock);
     [self.handlers addObject:[[PCRInstalledHandler alloc] initWithHost:host andPath:path handler:handler]];
     pthread_mutex_unlock(&_lock);
