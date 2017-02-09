@@ -49,9 +49,9 @@
 }
 
 // MARK: - Install handler
-- (void)installHandlerForPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
+- (void)installHandlerForHost:(nullable NSString *)host andPath:(NSString *)path handler:(Class<PCRRoutingHandler>)handler {
     pthread_mutex_lock(&_lock);
-    [self.handlers addObject:[[PCRInstalledHandler alloc] initWithPath:path handler:handler]];
+    [self.handlers addObject:[[PCRInstalledHandler alloc] initWithHost:host andPath:path handler:handler]];
     pthread_mutex_unlock(&_lock);
 }
 
@@ -73,7 +73,7 @@
     id<PCRRoutingHandler> foundHandler = nil;
 
     for (PCRInstalledHandler *handler in self.handlers) {
-        NSDictionary *params = [handler URLMatchesPath:URL];
+        NSDictionary *params = [handler URLMatchesHostAndPath:URL];
         if (params) {
             foundHandler = [[(Class)handler.handler alloc] initWithURL:URL params:params];
             break;
