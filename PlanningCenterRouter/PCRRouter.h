@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Shared Router Instance
  */
-+ (instancetype)globalRouter;
+@property (class, readonly) PCRRouter *globalRouter;
 
 /**
  *  Install a hander for a URL
