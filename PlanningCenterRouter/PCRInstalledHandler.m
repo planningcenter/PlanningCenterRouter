@@ -32,6 +32,10 @@
 
 - (nullable NSDictionary<NSString *, NSString *> *)URLMatchesHostAndPath:(NSURL *)URL {
     NSArray<NSString *> *components = [[URL path] pathComponents];
+    if (components.count == 0) {
+        // If the URL comes in with no path
+        components = @[@"/"];
+    }
     NSArray<NSString *> *matches = [self.path pathComponents];
 
     if (components.count < matches.count) {
